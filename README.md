@@ -3,6 +3,7 @@ Steps to run:
   1. npm install
   2. Create a .env file
   3. Create a variable with name "API_KEY" and put your api key value there.
+  4. Open a new terminal window and run "redis-server" (Use "brew install redis" if redis isn't present)
   4. npm start
 ```
 

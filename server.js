@@ -13,7 +13,7 @@ app.get("/autocomplete/:query", (req, res) => {
     const now = new Date();
 
     client.exists("autocomplete", (err, ok) => {
-        if (ok && ((now.getTime() - lastHit.getTime()) / 1000) % 60 < 60) {
+        if (ok && ((now.getTime() - lastHit.getTime()) / 1000) % 60 < 300) {
             client.get("analysis", (err, data) => {
                 res.send(JSON.parse(data));
             });
@@ -51,8 +51,8 @@ app.get("/analysis/:symbol", (req, res) => {
     client.exists("analysis", (err, ok) => {
         if (err) console.log(err);
 
-        // If cache is present and it is less than a minute old, return the cache.
-        if (ok && ((now.getTime() - lastHit.getTime()) / 1000) % 60 < 60) {
+        // If cache is present and it is less than 5 minutes old, return the cache.
+        if (ok && ((now.getTime() - lastHit.getTime()) / 1000) % 60 < 300) {
             client.get("analysis", (err, data) => {
                 res.send(JSON.parse(data));
             });
